@@ -17,15 +17,31 @@ describe("test string calculator function", () => {
   });
 
   // if any negative number present in string, throw error
-  test("negative number inside string should throw exception with all negative numbers", () => {
-    const negNumber = -9;
-    expect(add("8,-9,2")).toThrow(`negative numbers not allowed: ${negNumber}`);
+  test("negative number inside string should throw error with single negative numbers", () => {
+    expect(() => add("8,-9,2")).toThrow('negative numbers not allowed: -9');
   });
 
   // if multiple negative numbers present in string, throw error
-  test("negative number inside string should throw exception with all negative numbers", () => {
-    expect(add("8,-9,2,-3,-1,6")).toThrow(
+  test("negative number inside string should throw error with multiple negative numbers", () => {
+    expect(() => add("8,-9,2,-3,-1,6")).toThrow(
       'negative numbers not allowed: -9,-3,-1'
     );
+  });
+
+  // if \n present as delimiter , then take it as delimiter
+  test("\\n as delimiter should also find the sum of all numbers", () => {
+    expect(add("8\n9\n2\n6")).toBe(25);
+  });
+
+  // both , and \n present as delimiter should work
+  test("\\n and , as delimiter should also find the sum of all numbers", () => {
+    expect(add("8\n12,2\n6")).toBe(28);
+  });
+
+  // both , and \n present as delimiter should throw error with negative numbers
+  test("\\n and , as delimiter with negative numbers should throw error", () => {
+    expect(() => add("8\n-12,-2\n6")).toThrow(
+        'negative numbers not allowed: -12,-2'
+      );
   });
 });
