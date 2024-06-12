@@ -1,4 +1,4 @@
-function findDelimiter(numbersWithoutSpaces: string): {
+function findDelimiterAndNumberString(numbersWithoutSpaces: string): {
   delimiter: string;
   remainingString: string;
 } {
@@ -28,7 +28,7 @@ function findSumFromNumbersString(
     splitString = delimiter;
   }
   return numbersWithoutSpaces
-    .split(splitString) // Split the string by commas or newlines
+    .split(splitString)
     .map(Number)
     .reduce((acc, curr) => {
       // maintain a list of negative numbers
@@ -55,7 +55,8 @@ export function add(numbers: string): number {
     numbersWithoutSpaces.length > 2 &&
     numbersWithoutSpaces.startsWith("//")
   ) {
-    const { delimiter, remainingString } = findDelimiter(numbersWithoutSpaces);
+    const { delimiter, remainingString } =
+      findDelimiterAndNumberString(numbersWithoutSpaces);
     result = findSumFromNumbersString(
       remainingString,
       negNumbersList,
@@ -73,5 +74,3 @@ export function add(numbers: string): number {
   }
   return result;
 }
-
-console.log(add("//abc\n1abc2abc5abc2abc8"));
