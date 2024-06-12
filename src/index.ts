@@ -1,7 +1,6 @@
-function findDelimiterAndNumberString(numbersWithoutSpaces: string): {
-  delimiter: string;
-  remainingString: string;
-} {
+import { DelimiterStringStruct } from "./common/customTypes";
+
+function findDelimiterAndNumberString(numbersWithoutSpaces: string): DelimiterStringStruct {
   // Find the position of the newline character
   let newlineIndex = numbersWithoutSpaces.indexOf("\n");
 
@@ -48,7 +47,6 @@ export function add(numbers: string): number {
   // remove spaces in string if any
   const numbersWithoutSpaces = numbers.replace(/ /g, "");
   const negNumbersList: number[] = [];
-  //   console.log("numbers without spaces", numbersWithoutSpaces)
 
   // check if we have dynamic delimiters configured in this form:- //[delimiter]\n[numbers…]
   if (
